@@ -11,5 +11,5 @@ set (CMAKE_EXE_LINKER_FLAGS "-fprofile-arcs -ftest-coverage" )
 
 include_directories(.)
 
-#add_subdirectory(code)
+add_subdirectory(code)
 add_subdirectory(googletest-main)
