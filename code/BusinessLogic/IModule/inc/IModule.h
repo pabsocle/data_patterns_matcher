@@ -5,7 +5,7 @@ class IModule {
     public:
         virtual void start() = 0;
         virtual void stop() = 0;
-        virtual void setDataReceiver(IModule *dataReceiver) = 0;
+        virtual void setDataReceiver(IModule* dataReceiver_0) = 0;
 
 };
 
