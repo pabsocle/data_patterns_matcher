@@ -1,1 +1,2 @@
 add_subdirectory(BusinessLogic)
+add_subdirectory(UnitTests)

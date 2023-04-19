@@ -7,6 +7,6 @@ class IModule {
         virtual void stop() = 0;
         virtual void setDataReceiver(IModule *dataReceiver) = 0;
 
-}
+};
 
 #endif // IMODULE_H
