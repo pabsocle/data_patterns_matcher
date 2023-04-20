@@ -28,12 +28,31 @@ TEST_F(GIVENAnArrayGenerator, WHENGenerateArrayIsCreatedTHENRUnThreadIsNotRunnin
     ASSERT_FALSE(sutArrayGenerator->isRunning());
 }
 
+TEST_F(GIVENAnArrayGenerator, WHENGenerateArrayIsStartedAndAfterStoppedTHENFirstRunThreadIsRunningAndAfterRunThreadIsNotRunning)
+{
+    //ARRANGE
+
+    //ACT
+    sutArrayGenerator->start();
+    bool started = sutArrayGenerator->isRunning();
+    
+    sutArrayGenerator->stop();
+    bool stopped = sutArrayGenerator->isRunning();
+
+    //ASSERT
+    EXPECT_TRUE(started);
+    EXPECT_FALSE(stopped);
+}
+
+
 TEST_F(GIVENAnArrayGenerator, WHENGenerateArrayThreadRunsTHENOneArrayOfRandomLengthBetween1To100IsCreated)
 {
     //ARRANGE
 
     //ACT
     sutArrayGenerator->start();
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    sutArrayGenerator->stop();
 
     //ASSERT
     const std::vector<int>& generatedArray = sutArrayGenerator->getLastGeneratedArray();
@@ -51,15 +70,6 @@ TEST_F(GIVENAnArrayGenerator, WHENGenerateArrayThreadRunsTHENDataOfCreatedArrayO
 }
 
 TEST_F(GIVENAnArrayGenerator, WHENGenerateArrayThreadRunsTHENArrayIsCreatedAndPassedToNextIModule)
-{
-    //ARRANGE
-
-    //ACT
-
-    //ASSERT
-}
-
-TEST_F(GIVENAnArrayGenerator, WHENGenerateArrayIsStoppedTHENRunThreadIsNotRunning)
 {
     //ARRANGE
 

@@ -1,7 +1,9 @@
+#ifndef ARRAYGENERATOR_H
+#define ARRAYGENERATOR_H
+
 #include "code/BusinessLogic/IModule/inc/IModule.h"
 
 #include <thread>
-#include <vector>
 
 class ArrayGenerator : public :: IModule
 {
@@ -13,6 +15,8 @@ class ArrayGenerator : public :: IModule
         void setDataReceiver(IModule* dataReceiver_0) override;
         bool isRunning();
         const std::vector<int>& getLastGeneratedArray() const;
+    protected:
+            void receiveData(const std::vector<int>* data, int size) override {}
     private:
         IModule* dataReceiver;
         bool moduleRunning;
@@ -20,4 +24,7 @@ class ArrayGenerator : public :: IModule
         std::thread moduleThread;
 
         void runThread();
+        std::vector<int> randomArrayGenerator();
 };
+
+#endif // ARRAYGENERATOR_H
