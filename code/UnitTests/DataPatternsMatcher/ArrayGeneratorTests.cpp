@@ -2,6 +2,8 @@
 
 #include "code/BusinessLogic/PatternsMatcherModules/inc/ArrayGenerator.h"
 
+#include "code/UnitTests/DataPatternsMatcher/IModuleMock.h"
+
 class GIVENAnArrayGenerator : public testing::Test
 {
     protected:
@@ -44,14 +46,13 @@ TEST_F(GIVENAnArrayGenerator, WHENGenerateArrayIsStartedAndAfterStoppedTHENFirst
     EXPECT_FALSE(stopped);
 }
 
-
 TEST_F(GIVENAnArrayGenerator, WHENGenerateArrayThreadRunsTHENOneArrayOfRandomLengthBetween1To100IsCreated)
 {
     //ARRANGE
 
     //ACT
     sutArrayGenerator->start();
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    std::this_thread::sleep_for(std::chrono::milliseconds(150));
     sutArrayGenerator->stop();
 
     //ASSERT
@@ -65,15 +66,35 @@ TEST_F(GIVENAnArrayGenerator, WHENGenerateArrayThreadRunsTHENDataOfCreatedArrayO
     //ARRANGE
 
     //ACT
+    sutArrayGenerator->start();
+    std::this_thread::sleep_for(std::chrono::milliseconds(150));
+    sutArrayGenerator->stop();
 
     //ASSERT
+    const std::vector<int>& generatedArray = sutArrayGenerator->getLastGeneratedArray();
+    for (const int& element : generatedArray)
+    {
+        EXPECT_GE(element, 0);
+        EXPECT_LE(element, 255);
+    }
+
 }
 
 TEST_F(GIVENAnArrayGenerator, WHENGenerateArrayThreadRunsTHENArrayIsCreatedAndPassedToNextIModule)
 {
     //ARRANGE
+    IModuleMock dataReceiverMock;
+    sutArrayGenerator->setDataReceiver(&dataReceiverMock);
+
+    EXPECT_CALL(dataReceiverMock, receiveData)
+        .Times(1);
 
     //ACT
+    sutArrayGenerator->start();
+    
+    std::this_thread::sleep_for(std::chrono::milliseconds(150));
+    sutArrayGenerator->stop();
 
     //ASSERT
+
 }

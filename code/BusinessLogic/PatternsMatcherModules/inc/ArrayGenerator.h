@@ -16,7 +16,7 @@ class ArrayGenerator : public :: IModule
         bool isRunning();
         const std::vector<int>& getLastGeneratedArray() const;
     protected:
-            void receiveData(const std::vector<int>* data, int size) override {}
+            void receiveData(const std::vector<int>& data, int size) override {}
     private:
         IModule* dataReceiver;
         bool moduleRunning;
