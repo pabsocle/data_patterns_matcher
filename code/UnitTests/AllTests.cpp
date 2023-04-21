@@ -1,6 +1,7 @@
 #include "gtest/gtest.h"
 
 #include "code/UnitTests/DataPatternsMatcher/ArrayGeneratorTests.cpp"
+#include "code/UnitTests/DataPatternsMatcher/PatternMatcherTests.cpp"
 
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
