@@ -3,6 +3,9 @@
 
 #include "code/BusinessLogic/IModule/inc/IModule.h"
 
+#include <thread>
+#include <queue>
+
 class PatternMatcher : public :: IModule
 {
     public:
@@ -12,12 +15,15 @@ class PatternMatcher : public :: IModule
         void stop() override;
         void setDataReceiver(IModule* dataReceiver_0) override;
         bool isRunning();
-        const std::vector<uint8_t>& getPattern() const;
+        const std::vector<int>& getPattern() const;
     protected:
         void receiveData(const std::vector<int>& dataGenerated, int size) override;
     private:
+        IModule* dataReceiver;
+        std::vector<int> lastReceivedArray;
+        std::queue<std::vector<int>> dataBuffer;
         bool moduleRunning;
-        std::vector<int> goalPattern;
+        std::vector<int> goalPattern = {0x00, 0x01, 0x02};
 
         std::thread moduleThread;
 
