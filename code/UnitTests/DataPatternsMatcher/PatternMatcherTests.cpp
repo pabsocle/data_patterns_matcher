@@ -4,23 +4,23 @@
 
 #include "code/UnitTests/DataPatternsMatcher/IModuleMock.h"
 
-class GIVENAnPatternMatcher : public testing::Test
+class GIVENAPatternMatcher : public testing::Test
 {
     protected:
         PatternMatcher* sutPatternMatcher = nullptr;
     public:
-    GIVENAnPatternMatcher()
+    GIVENAPatternMatcher()
     {
         sutPatternMatcher = new PatternMatcher();
     }
 
-    ~GIVENAnPatternMatcher()
+    ~GIVENAPatternMatcher()
     {
         delete sutPatternMatcher;
     }
 };
 
-TEST_F(GIVENAnPatternMatcher, WHENPatternMatcherIsCreatedTHENRUnThreadIsNotRunningAndPattern)
+TEST_F(GIVENAPatternMatcher, WHENPatternMatcherIsCreatedTHENRUnThreadIsNotRunningAndPatternIsInitialized)
 {
     //ARRANGE
     std::vector<int> pattern = {0x00, 0x01, 0x02};
@@ -32,7 +32,7 @@ TEST_F(GIVENAnPatternMatcher, WHENPatternMatcherIsCreatedTHENRUnThreadIsNotRunni
     ASSERT_EQ(pattern, sutPatternMatcher->getPattern());
 }
 
-TEST_F(GIVENAnPatternMatcher, WHENGenerateArrayIsStartedAndAfterStoppedTHENFirstRunThreadIsRunningAndAfterRunThreadIsNotRunning)
+TEST_F(GIVENAPatternMatcher, WHENGenerateArrayIsStartedAndAfterStoppedTHENFirstRunThreadIsRunningAndAfterRunThreadIsNotRunning)
 {
     //ARRANGE
 
@@ -48,7 +48,7 @@ TEST_F(GIVENAnPatternMatcher, WHENGenerateArrayIsStartedAndAfterStoppedTHENFirst
     EXPECT_FALSE(stopped);
 }
 
-TEST_F(GIVENAnPatternMatcher, WhenDataIsReceivedIfThereIsAMatchWithPatternTHENArrayIsSentToNextModule)
+TEST_F(GIVENAPatternMatcher, WhenDataIsReceivedIfThereIsAMatchWithPatternTHENArrayIsSentToNextModule)
 {
     //ARRANGE
     std::vector<int> dataReceived = {0x03, 0x04, 0x05, 0x06, 0x00, 0x01, 0x02, 0x07, 0x08, 0x09};
@@ -67,7 +67,7 @@ TEST_F(GIVENAnPatternMatcher, WhenDataIsReceivedIfThereIsAMatchWithPatternTHENAr
     //ASSERT
 }
 
-TEST_F(GIVENAnPatternMatcher, WhenDataIsReceivedIfThereIsNoMatchWithPatternTHENArrayIsNotSentToNextModule)
+TEST_F(GIVENAPatternMatcher, WhenDataIsReceivedIfThereIsNoMatchWithPatternTHENArrayIsNotSentToNextModule)
 {
     //ARRANGE
     std::vector<int> dataReceived = {0x03, 0x04, 0x05, 0x06, 0x00, 0x01, 0x01, 0x07, 0x08, 0x09};

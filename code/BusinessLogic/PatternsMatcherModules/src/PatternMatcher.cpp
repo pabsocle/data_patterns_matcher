@@ -11,7 +11,7 @@ void PatternMatcher::start()
 void PatternMatcher::stop()
 {
     moduleRunning = false;
-     if (moduleThread.joinable()) {
+    if (moduleThread.joinable()) {
         moduleThread.join();
     }
 }
