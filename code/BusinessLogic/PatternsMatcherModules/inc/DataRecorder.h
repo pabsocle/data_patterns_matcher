@@ -23,11 +23,13 @@ class DataRecorder : public :: IModule
         IModule* dataReceiver;
         bool moduleRunning;
         std::queue<std::vector<int>> inputBuffer;
-        std::vector<std::vector<int>> records;
+        std::vector<std::pair<std::chrono::system_clock::time_point, std::vector<int>>> dataRecords;
         const int MAX_RECORDS = 100;
         std::thread moduleThread;
 
         void runThread();
+        void getPendingData();
+        void printRecords();
 };
 
 #endif // DATARECORDER_H

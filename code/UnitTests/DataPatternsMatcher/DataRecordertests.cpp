@@ -55,11 +55,9 @@ TEST_F(GIVENADataRecorder, WHENAVectorIsReceivedTHENItIsStoredAndPrintedWithUTCT
 
     std::string output = testing::internal::GetCapturedStdout();
 
-    ASSERT_NE(output.find("[0x01, 0x02, 0x03, 0x02, 0xFF]"), std::string::npos);
-    ASSERT_NE(output.find("[0x04, 0x05, 0x06]"), std::string::npos);
-    ASSERT_NE(output.find("[0x07, 0x08, 0x09, 0x0A]"), std::string::npos);
-
-    std::string output = testing::internal::GetCapturedStdout();
+    EXPECT_TRUE(output.find("[0x01,0x02,0x03,0x02,0xFF]\n"));
+    EXPECT_TRUE(output.find("[0x04,0x05,0x06]\n"));
+    EXPECT_TRUE(output.find("[0x07,0x08,0x09,0x0A]\n"));
 
     sutDataRecorder->stop();
 
