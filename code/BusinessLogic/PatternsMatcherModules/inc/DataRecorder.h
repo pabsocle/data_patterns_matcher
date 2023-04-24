@@ -15,6 +15,7 @@ class DataRecorder : public :: IModule
         void stop() override;
         void setDataReceiver(IModule* dataReceiver_0) override;
         bool isRunning();
+        const std::vector<std::pair<std::chrono::system_clock::time_point, std::vector<int>>>& getRecords() const;
 
     protected:
         void receiveData(const std::vector<int>& dataGenerated, int size) override;

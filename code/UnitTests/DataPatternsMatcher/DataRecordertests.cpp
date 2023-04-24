@@ -55,12 +55,31 @@ TEST_F(GIVENADataRecorder, WHENAVectorIsReceivedTHENItIsStoredAndPrintedWithUTCT
 
     std::string output = testing::internal::GetCapturedStdout();
 
+    //ASSERT
+
     EXPECT_TRUE(output.find("[0x01,0x02,0x03,0x02,0xFF]\n"));
     EXPECT_TRUE(output.find("[0x04,0x05,0x06]\n"));
     EXPECT_TRUE(output.find("[0x07,0x08,0x09,0x0A]\n"));
 
     sutDataRecorder->stop();
+}
+
+TEST_F(GIVENADataRecorder, WHENDataRecordsVectorIsFullTHENNoMoreDataIsRecorded) {
+
+    //ARRANGE
+    sutDataRecorder->start();
+
+    for (int i = 0; i < 100; i++) {
+        std::vector<int> data(100, i);
+        sutDataRecorder->sendData(data);
+    }
+
+    //ACT
+    std::vector<int> data = {0x01, 0x02, 0x03};
+    sutDataRecorder->sendData(data);
 
     //ASSERT
-
+    std::this_thread::sleep_for(std::chrono::milliseconds(10000));
+    ASSERT_EQ(100, sutDataRecorder->getRecords().size());
+    sutDataRecorder->stop();
 }

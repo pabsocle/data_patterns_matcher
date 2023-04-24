@@ -44,7 +44,7 @@ void DataRecorder::runThread()
         {
             getPendingData();
             printRecords();
-            std::this_thread::sleep_for(std::chrono::milliseconds(100));
+            std::this_thread::sleep_for(std::chrono::milliseconds(50));
         }
     }
 }
@@ -77,4 +77,9 @@ void DataRecorder::printRecords()
         }
         std::cout << "]\n";
     }
+}
+
+const std::vector<std::pair<std::chrono::system_clock::time_point, std::vector<int>>>& DataRecorder::getRecords() const
+{
+    return dataRecords;
 }
