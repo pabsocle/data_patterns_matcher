@@ -3,6 +3,9 @@
 #include <chrono>
 #include <random>
 
+ArrayGenerator::ArrayGenerator() : dataReceiver(nullptr),  moduleRunning(false) {}
+ArrayGenerator::~ArrayGenerator(){}
+
 void ArrayGenerator::start()
 {
     moduleRunning = true;
@@ -15,6 +18,11 @@ void ArrayGenerator::stop()
      if (moduleThread.joinable()) {
         moduleThread.join();
     }
+}
+
+void ArrayGenerator::receiveData(const std::vector<int>& data, int size)
+{
+
 }
 
 void ArrayGenerator::setDataReceiver(IModule *dataReceiver_0)
@@ -30,7 +38,7 @@ void ArrayGenerator::runThread()
         dataReceiver->sendData(lastGeneratedArray);
     }
 
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    std::this_thread::sleep_for(std::chrono::milliseconds(delayThreadMilliseconds));
 }
 
 bool ArrayGenerator::isRunning()
