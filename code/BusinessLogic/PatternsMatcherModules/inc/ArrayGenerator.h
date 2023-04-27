@@ -22,7 +22,7 @@ class ArrayGenerator : public :: IModule
         bool moduleRunning;
         std::vector<int> lastGeneratedArray;
         std::thread moduleThread;
-        const int delayThreadMilliseconds = 10;
+        const int delayThreadMilliseconds = 100;
 
         void runThread();
         std::vector<int> randomArrayGenerator();

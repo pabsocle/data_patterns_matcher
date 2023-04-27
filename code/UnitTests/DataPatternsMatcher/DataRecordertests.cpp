@@ -79,7 +79,7 @@ TEST_F(GIVENADataRecorder, WHENDataRecordsVectorIsFullTHENNoMoreDataIsRecorded) 
     sutDataRecorder->sendData(data);
 
     //ASSERT
-    std::this_thread::sleep_for(std::chrono::milliseconds(10000));
+    std::this_thread::sleep_for(std::chrono::milliseconds(11000));
     ASSERT_EQ(100, sutDataRecorder->getRecords().size());
     sutDataRecorder->stop();
 }
